@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# This program uses shell commands to print out the date of the latest update
+# for the course page.
+#
+# 8/5/18
+
+# variable for website URL
+
+WEBSITE=http://web.physics.ucsb.edu/~phys129/lipman/  
+
+# fetch the website using wget and pipe into grep, search for line containing 
+# phrase "latest update" and pipe into sed to modify the text to show the date
+# only (more described in text file). Date of update saved to variable DATE.
+ 
+DATE=$(wget -q -O- $WEBSITE | grep "Latest update:" | sed -e 's/^.*">//' -e 's/<.*$//')
+
+echo "Latest update was on: $DATE"
